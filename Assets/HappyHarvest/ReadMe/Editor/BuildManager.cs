@@ -3,6 +3,8 @@ using UnityEditor;
 using UnityEditor.Build.Reporting;
 using UnityEngine;
 
+// LR1: Build automation for WebGL
+
 public static class BuildManager
 {
     // Путь для сохранения WebGL-версии игры
