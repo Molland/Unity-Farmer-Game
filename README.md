@@ -43,7 +43,7 @@
 
 ### Скриншот 7 — Полученные Approve
 
-> 
+> <img width="1646" height="833" alt="изображение" src="https://github.com/user-attachments/assets/940cc304-ef10-466b-be72-0bd17609782e" />
 
 ---
 
