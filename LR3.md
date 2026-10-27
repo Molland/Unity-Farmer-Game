@@ -181,17 +181,33 @@ $ docker stop unity_compressed_container && docker rm unity_compressed_container
 
 ### Скриншот — Файлы `Dockerfile`, `nginx.conf` и пайплайн в основном репозитории
 
+В корне репозитория появились `.dockerignore`, `Dockerfile`, `nginx.conf`, отчёты `LR1.md`, `LR2.md`, `LR3.md`, каталог `docs/lr3/` со скриншотами и обновлённый пайплайн в `.github/workflows/main.yml`. На верхней строке — зелёная галочка успешного прохождения CI у merge-коммита из ветки `LR3`; в боковой панели виден связанный пакет `unity-farmer-game`.
+
 ![Файлы репозитория](docs/lr3/repo-files.jpg)
 
+### Скриншот — Содержимое `nginx.conf`
+
+Дерево файлов слева и правила `add_header Content-Encoding gzip;` для `.js.gz`, `.wasm.gz` и `.data.gz` в правой части.
+
+![nginx.conf в репозитории](docs/lr3/nginx-conf.jpg)
+
 ### Скриншот — Полностью зелёный статус всех трёх задач во вкладке Actions
+
+Запуск рабочего процесса `Unity Farmer Game CI/CD` завершился со статусом **Success** за 44 секунды; все три задачи — `sanity_check`, `mirror_repo` и `build_docker_image` — отмечены зелёными галочками.
 
 ![Actions: все задачи Passed](docs/lr3/actions-passed.jpg)
 
 ### Скриншот — Готовый пакет в GitHub Container Registry
 
+Публичный пакет `unity-farmer-game`, привязанный к репозиторию `Unity-Farmer-Game`, опубликован под тегами `latest` и `4720f1c10aacb3935fd1496836b6862fd60da7fb` (ревизия коммита). Получить образ можно командой `docker pull ghcr.io/molland/unity-farmer-game:latest`.
+
 ![Пакет в GHCR](docs/lr3/ghcr-package.jpg)
 
-Отчёт разделён на три файла — [LR1.md](LR1.md), [LR2.md](LR2.md) и [LR3.md](LR3.md); ссылки на них собраны в [README.md](README.md).
+### Скриншот — Главный `README.md` с таблицей ссылок на отчёты
+
+Отчёт разделён на три файла — [LR1.md](LR1.md), [LR2.md](LR2.md) и [LR3.md](LR3.md); ссылки на них и описание структуры репозитория собраны в [README.md](README.md).
+
+![README с таблицей отчётов](docs/lr3/readme-table.jpg)
 
 ---
 
