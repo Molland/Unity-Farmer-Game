@@ -2,10 +2,6 @@
 
 **ФИО:** Шмат А.Д.  
 **Группа:** 23-СТ  
-**Дисциплина:** АРиЭПО
-
-Проект: [Unity-Farmer-Game](https://github.com/Molland/Unity-Farmer-Game) — 2D-игра Happy Harvest на Unity 6.
-
 ---
 
 | № | Лабораторная работа | Отчёт |
@@ -15,13 +11,3 @@
 | 3 | Контейнеризация веб-сервера в Docker и раздача сжатых файлов со стороны Nginx | [LR3.md](LR3.md) |
 
 ---
-
-## Структура репозитория
-
-| Файл / каталог | Назначение |
-|:---------------|:-----------|
-| `Dockerfile`, `nginx.conf`, `.dockerignore` | Сборка контейнера с Nginx и сжатой WebGL-сборкой (ЛР №3) |
-| `.github/workflows/main.yml` | CI/CD: Sanity Check, зеркалирование репозитория, публикация образа в GHCR |
-| `Assets/HappyHarvest/` | Ассеты и скрипты 2D-игры |
-| `Assets/HappyHarvest/ReadMe/Editor/BuildManager.cs` | Скрипт автоматической сборки WebGL из командной строки (ЛР №1) |
-| `docs/lr3/` | Скриншоты к отчёту по ЛР №3 |
