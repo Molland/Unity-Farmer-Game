@@ -1,0 +1,16 @@
+# Контекст сборки Docker не должен включать служебные и тяжёлые каталоги Unity.
+# Без этого файла демон Docker пересылает на каждый docker build несколько гигабайт
+# (только папка Library весит ~4.7 ГБ). Для образа нужны лишь nginx.conf и Builds/WebGL/.
+
+Library/
+Logs/
+Temp/
+Obj/
+UserSettings/
+.vscode/
+.git/
+Assets/
+*.csproj
+*.sln
+*.slnx
+build_webgl.log
