@@ -15,6 +15,7 @@ public class PlayerTests
     [Test]
     public void EditMode_PlayerPrefab_IsConfiguredCorrectly()
     {
+        Assert.AreEqual(1, 2, "ВРЕМЕННАЯ ПОЛОМКА: демонстрация гейта качества (ЛР №4, шаг 5.3)");
         // Загружаем содержимое префаба игрока
         GameObject playerPrefab = PrefabUtility.LoadPrefabContents(PlayerPrefabPath);
         Assert.IsNotNull(playerPrefab, "Ошибка: не удалось загрузить префаб Character.prefab!");
