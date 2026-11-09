@@ -26,9 +26,60 @@ jobs:
           find Assets/ -name "*Controller.cs" -print
           find Assets/ -name "BuildManager.cs" -print
 
-  # ЗАДАЧА 2: Автоматическое зеркалирование в резервный репозиторий
+  # ЗАДАЧА 2 (ЛР №4): Автоматический запуск тестов Unity
+  run_tests:
+    needs: sanity_check # Тесты запускаются сразу после проверки структуры проекта
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          lfs: true # Активируем поддержку Git LFS, если в игре есть тяжелая графика
+
+      # Создаем кэш для папки Library, чтобы тесты запускались быстрее
+      - uses: actions/cache@v4
+        with:
+          path: Library
+          key: Library-${{ hashFiles('Packages/packages-lock.json', 'Assets/**/*.asmdef') }}
+
+      # Официальный CLI GameCI с фиксированной версией
+      - name: Install GameCI CLI
+        run: |
+          curl -sL -o game-ci.tar.gz https://github.com/game-ci/cli/releases/download/v0.1.72/game-ci-linux-x64.tar.gz
+          tar xzf game-ci.tar.gz ./game-ci
+          echo "$PWD" >> $GITHUB_PATH
+
+      # Запуск тестов EditMode и PlayMode в контейнере unityci/editor.
+      # CLI вызывается напрямую, а не через game-ci/unity-test-runner@v4:
+      # текущий экшен формирует флаг --no-coverageEnabled, которого CLI
+      # v0.1.72 не понимает (Unknown argument, exit code 1). Рабочая форма -
+      # --coverageEnabled=false. Coverage отключен, т.к. инструментирование
+      # кода роняет Unity 6 в контейнере (SIGSEGV, exit code 139).
+      - name: Run Unity Tests
+        run: |
+          game-ci test --docker --dockerShmSize=1025m \
+            --engine=unity --testPlatforms='playmode;editmode;COMBINE_RESULTS' \
+            --engineVersion=6000.3.23f1 --coverageEnabled=false \
+            --artifactsPath=artifacts --dockerIsolationMode=default \
+            --containerRegistryRepository=unityci/editor \
+            --containerRegistryImageVersion=3
+        env:
+          # Секреты лицензии Unity для активации редактора на раннере
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+
+      # Сохраняем результаты и логи тестов артефактами (даже при падении)
+      - name: Upload test artifacts
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-results
+          path: artifacts/
+
+  # ЗАДАЧА 3: Автоматическое зеркалирование в резервный репозиторий
   mirror_repo:
-    needs: sanity_check # Начнется только после того, как успешно пройдет первая задача
+    needs: run_tests # Теперь зеркалирование начнется только после успешных тестов
     if: github.repository == 'Molland/Unity-Farmer-Game' # Только в оригинальном репо, чтобы избежать цикла в backup
     runs-on: ubuntu-latest
     steps:
@@ -57,9 +108,9 @@ jobs:
           git push --force https://x-access-token:${{ secrets.BACKUP_TOKEN }}@github.com/Molland/Unity-Farmer-Game_backup.git main
           echo "=== Код успешно продублирован ==="
 
-  # ЗАДАЧА 3: Автоматическая сборка Docker-образа в облако
+  # ЗАДАЧА 4: Автоматическая сборка Docker-образа в облако
   build_docker_image:
-    needs: sanity_check
+    needs: run_tests # Теперь Docker начнет собираться ТОЛЬКО если тесты прошли успешно!
     if: github.repository == 'Molland/Unity-Farmer-Game' # Только в оригинальном репо: GITHUB_TOKEN может публиковать пакеты лишь от имени своего репозитория
     runs-on: ubuntu-latest
     # КРИТИЧЕСКИ ВАЖНЫЕ СТРОКИ: Разрешаем этой конкретной задаче публиковать пакеты
