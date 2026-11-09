@@ -121,7 +121,11 @@ public IEnumerator PlayMode_PlayerDeath_EventPlannedAtZeroHealth()
 | `PlayMode_PlayerTakesDamage_HealthDecreases` | PlayModeTests | ✅ Passed |
 | `PlayMode_PlayerDeath_EventPlannedAtZeroHealth` (вариант 19) | PlayModeTests | ✅ Passed |
 
-Скриншот зелёного запуска Test Runner: ![Test Runner — все тесты зелёные](docs/lr4/test-runner.png)
+Скриншот зелёного запуска Test Runner:
+
+![Test Runner — вкладка EditMode, тест зелёный](docs/lr4/test-runner-editmode.png)
+
+![Test Runner — вкладка PlayMode, оба теста зелёные](docs/lr4/test-runner-playmode.png)
 
 ---
 
@@ -186,7 +190,7 @@ sanity_check → run_tests → mirror_repo
 
 Задача `mirror_repo` и задача `build_docker_image` имеют `needs: run_tests`, поэтому при падении хотя бы одного теста они даже не запускаются — сломанный коммит автоматически блокируется и не доходит до зеркалирования и сборки Docker-образа.
 
-Скриншот зелёного прогона Actions: ![Actions — run_tests зелёная](docs/lr4/actions-run-tests.png)
+Скриншот зелёного прогона Actions (цепочка `sanity_check → run_tests → build_docker_image`): ![Actions — run_tests зелёная](docs/lr4/actions-run-tests.png)
 
 ---
 
@@ -210,7 +214,7 @@ sanity_check → run_tests → mirror_repo
 2. Папка `Assets/Tests` с тестами и тремя `.asmdef` закоммичена в репозиторий.
 3. **Демонстрация гейта:** во временном коммите тест заменён на заведомо ломающий (`Assert.AreEqual(1, 2)`). Прогон показал: `run_tests` — красная, задачи `mirror_repo` и `build_docker_image` — не запускались (заблокированы `needs:`). Коммит с поломкой удалён, тесты возвращены в рабочий вид.
 
-Скриншот красного прогона (тест заблокировал сборку): ![Actions — сломанный тест блокирует сборку](docs/lr4/actions-fail-gate.png)
+Скриншот красного прогона (тест заблокировал сборку — `mirror_repo` и `build_docker_image` получили статус Skipped, 0s): ![Actions — сломанный тест блокирует сборку](docs/lr4/actions-fail-gate.png)
 
 ---
 
