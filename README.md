@@ -14,4 +14,4 @@
 
 ---
 
-**Играть онлайн:** [https://molland.github.io/Unity-Farmer-Game/](https://molland.github.io/Unity-Farmer-Game/) (сборка публикуется автоматически пайплайном из ЛР №5).
+[https://molland.github.io/Unity-Farmer-Game/](https://molland.github.io/Unity-Farmer-Game/)
