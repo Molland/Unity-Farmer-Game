@@ -1,0 +1,18 @@
+{
+    "name": "HappyHarvest.Scripts.Editor",
+    "rootNamespace": "HappyHarvest",
+    "references": [
+        "GameAssembly"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
