@@ -1,7 +1,9 @@
 ﻿<Solution>
   <Project Path="PlayModeTests.csproj" />
   <Project Path="GameAssembly.csproj" />
+  <Project Path="HappyHarvest.ReadMe.Editor.csproj" />
   <Project Path="VFXGraph.OutputEventHandlers.csproj" />
   <Project Path="Tests.csproj" />
   <Project Path="VFXGraph.OutputEventHandlers.Editor.csproj" />
+  <Project Path="HappyHarvest.Scripts.Editor.csproj" />
 </Solution>

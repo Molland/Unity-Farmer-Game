@@ -10,5 +10,8 @@
 | 2 | Настройка репозиториев на GitHub и базовая автоматическая проверка проекта (Sanity Check) | [LR2.md](LR2.md) |
 | 3 | Контейнеризация веб-сервера в Docker и раздача сжатых файлов со стороны Nginx | [LR3.md](LR3.md) |
 | 4 | Автоматизация тестирования (Unity Test Runner) в CI/CD. | [LR4.md](LR4.md) |
+| 5 | Автоматическая компиляция WebGL-игры в облаке и деплой на GitHub Pages | [LR5.md](LR5.md) |
 
 ---
+
+**Играть онлайн:** [https://molland.github.io/Unity-Farmer-Game/](https://molland.github.io/Unity-Farmer-Game/) (сборка публикуется автоматически пайплайном из ЛР №5).
